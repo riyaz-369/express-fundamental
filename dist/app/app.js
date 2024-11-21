@@ -5,7 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
+// parsers
+app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Hello world!");
+});
+app.post("/", (req, res) => {
+    console.log(req.body);
+    res.send("got data");
 });
 exports.default = app;
