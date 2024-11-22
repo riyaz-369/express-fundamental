@@ -7,11 +7,26 @@ const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 // parsers
 app.use(express_1.default.json());
-app.get("/", (req, res) => {
+// middleware
+const logger = (req, res, next) => {
+    console.log(req.url, req.method, req.host, req.hostname);
+    next();
+};
+app.get("/", logger, (req, res) => {
     res.send("Hello world!");
 });
 app.post("/", (req, res) => {
     console.log(req.body);
     res.send("got data");
+});
+// params
+app.get("/:userId", (req, res) => {
+    console.log(req.params);
+    res.send("success");
+});
+// query
+app.get("/", (req, res) => {
+    console.log(req.query);
+    res.send("successfully get query");
 });
 exports.default = app;
